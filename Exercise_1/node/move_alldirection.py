@@ -120,20 +120,21 @@ class get_odom(object):
 def main():
    
     rospy.init_node('move')                                                     #initiating node.
-    
-    move=raw_input("Do you want to move? (Y or N):  ")                          
-    if (move=='Y'):                                                             #proceed if user says 'Y'
-        dist=float(raw_input("Do far do want to move? (insert distance):  "))   
-        if (dist!=0.0):                                                         #proceed if user enters value other than 0 
-            direct=raw_input("Direction? (R, L, F or B):  ")
-            bot_odom=get_odom(dist)                                             #passing value of distance
-            vel=0.1                                                             #passing negative value of velocity as direction is right
-            bot_odom.move_bot(vel,direct)
+    move='Y'
+    while(move=='Y'):
+        move=raw_input("Do you want to move? (Y or N):  ")                          
+        if (move=='Y'):                                                             #proceed if user says 'Y'
+            dist=float(raw_input("Do far do want to move? (insert distance):  "))   
+            if (dist!=0.0):                                                         #proceed if user enters value other than 0 
+                direct=raw_input("Direction? (R, L, F or B):  ")
+                bot_odom=get_odom(dist)                                             #passing value of distance
+                vel=0.1                                                             #passing negative value of velocity as direction is right
+                bot_odom.move_bot(vel,direct)
+            else:
+                pass
         else:
-            pass
-    else:
-        print("Exiting..")
-        
+            print("Exiting..")
+    pass
 
 if __name__ == '__main__':
     main()
