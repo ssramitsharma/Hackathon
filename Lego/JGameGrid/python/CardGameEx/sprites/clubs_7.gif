@@ -1,0 +1,37 @@
+ the given port.
+   * @param port the port where the sensor is plugged-in
+   */
+  public CompassHTSensor(SensorPort port)
+  {
+    super(port, SharedConstants.LOWSPEED_9V);
+    cst = new CompassSensorThread();
+    cs = new lejos.nxt.addon.CompassHTSensor(sp);
+  }
+
+  /**
+   * Creates a sensor instance connected to port S1.
+   */
+  public CompassHTSensor()
+  {
+    this(SensorPort.S1);
+  }
+
+  protected void init()
+  {
+    if (NxtRobot.getDebugLevel() >= DEBUG_LEVEL_MEDIUM)
+      DebugConsole.show("us.init()");
+  }
+
+  protected void cleanup()
+  {
+    if (NxtRobot.getDebugLevel() >= DEBUG_LEVEL_MEDIUM)
+      DebugConsole.show("us.cleanup()");
+    isEvtEnabled = false;  // Disable events
+    if (cst != null)
+      cst.stopThread();
+  }
+
+  /**
+   * Registers the given compass listener for the given trigger level.
+   * If the touch thread is not yet started, start it now.
+   * If the trigger leve
